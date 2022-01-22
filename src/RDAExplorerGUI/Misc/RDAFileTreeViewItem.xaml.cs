@@ -26,7 +26,14 @@ namespace RDAExplorerGUI.Misc
             {
                 if (!System.IO.File.Exists(DirectoryExtension.GetTempWorkingDirectory() + "\\" + File.FileName))
                     File.ExtractToRoot(DirectoryExtension.GetTempWorkingDirectory());
-                Process.Start(DirectoryExtension.GetTempWorkingDirectory() + "\\" + File.FileName);
+                //Process.Start(DirectoryExtension.GetTempWorkingDirectory() + "\\" + File.FileName);
+                new Process
+                {
+                    StartInfo = new ProcessStartInfo(DirectoryExtension.GetTempWorkingDirectory() + "\\" + File.FileName)
+                    {
+                        UseShellExecute = true
+                    }
+                }.Start();
                 MainWindow.CurrentMainWindow.FileWatcher.Changed += new FileSystemEventHandler(FileWatcher_Changed);
                 MainWindow.CurrentMainWindow.FileWatcher.Deleted += new FileSystemEventHandler(FileWatcher_Deleted);
             }

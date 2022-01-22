@@ -1,60 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!--Project was exported from assembly: C:\Users\frank_000\Downloads\Anno1404-2070_RDA-Explorer_eng\RDAExplorer.dll-->
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F06F4391-E2ED-4C09-B671-D00871CC5F1D}</ProjectGuid>
+    <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <AssemblyName>RDAExplorer</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <ApplicationVersion>1.0.3.0</ApplicationVersion>
-    <FileAlignment>512</FileAlignment>
-    <RootNamespace>RDAExplorer</RootNamespace>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
+    <PackageReference Include="SharpZipLib" Version="1.3.3" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.261602">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Misc\StreamExtension.cs" />
-    <Compile Include="RDABlockCreator.cs" />
-    <Compile Include="RDAFile.cs" />
-    <Compile Include="RDAFileExtension.cs" />
-    <Compile Include="RDASkippedDataSection.cs" />
-    <Compile Include="RDAWriter.cs" />
-    <Compile Include="RDAReader.cs" />
-    <Compile Include="RDAFileStreamCache.cs" />
-    <Compile Include="FileHeader.cs" />
-    <Compile Include="BlockInfo.cs" />
-    <Compile Include="DirEntry.cs" />
-    <Compile Include="RDAFolder.cs" />
-    <Compile Include="RDAMemoryResidentHelper.cs" />
-    <Compile Include="UISettings.cs" />
-    <Compile Include="Misc\BinaryExtension.cs" />
-    <Compile Include="Misc\DateTimeExtension.cs" />
-    <Compile Include="ZLib\ZLib.cs" />
-    <Compile Include="AssemblyInfo.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

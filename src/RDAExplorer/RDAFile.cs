@@ -55,6 +55,7 @@ namespace RDAExplorer
 
         public void Extract(string destinationfile)
         {
+            Console.WriteLine($"Extract: {this.FileName}");
             byte[] data = GetData();
             using (FileStream fileStream = new FileStream(destinationfile, FileMode.Create))
                 fileStream.Write(data, 0, data.Length);
