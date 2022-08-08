@@ -19,12 +19,12 @@ namespace RDAExplorer
 
         public void Write(string Filename, FileHeader.Version version, bool compress, RDAReader originalReader, BackgroundWorker wrk)
         {
-            FileStream fileStream = new FileStream(Filename, FileMode.Create);
-            BinaryWriter writer = new BinaryWriter(fileStream);
+            using FileStream fileStream = new FileStream(Filename, FileMode.Create);
+            using BinaryWriter writer = new BinaryWriter(fileStream);
 
             // we'll write the header at the end, when we know the offset to the first block
             writer.BaseStream.Position = FileHeader.GetSize(version);
-            
+
             // blocks are organized by file type. there is one RDAFolder per block
             List<RDAFolder> blockFolders = RDABlockCreator.GenerateOf(Folder);
             int numBlocks = (int)originalReader.NumSkippedBlocks + blockFolders.Count;
@@ -50,7 +50,7 @@ namespace RDAExplorer
                 // anyway (we won't fit our "own" data in perfectly). And I'm just too afraid to get the
                 // bin-packing wrong.
                 writer.BaseStream.WriteBytes((skippedBlock.offset - (ulong)writer.BaseStream.Position), 0);
-                
+
                 // write the data
                 originalReader.CopySkippedDataSextion(skippedBlock.offset, skippedBlock.size, writer.BaseStream);
 
@@ -100,7 +100,8 @@ namespace RDAExplorer
                 for (int dirEntryIndex = 0; dirEntryIndex < blockFolder.Files.Count; ++dirEntryIndex)
                 {
                     RDAFile file = blockFolder.Files[dirEntryIndex];
-                    DirEntry dirEntry = new DirEntry() {
+                    DirEntry dirEntry = new DirEntry()
+                    {
                         compressed = dirEntryCompressedSizes[file],
                         filesize = file.UncompressedSize,
                         filename = file.FileName,
@@ -145,8 +146,6 @@ namespace RDAExplorer
             FileHeader fileHeader = FileHeader.Create(version);
             fileHeader.firstBlockOffset = blockInfoOffsets[0];
             WriteHeader(writer, 0, fileHeader, version);
-
-            fileStream.Close();
         }
 
         private static void WriteHeader(BinaryWriter writer, ulong offset, FileHeader fileHeader, FileHeader.Version version)
