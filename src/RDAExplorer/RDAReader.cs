@@ -224,9 +224,8 @@ namespace RDAExplorer
 
         private void ReadDirEntries(byte[] buffer, BlockInfo block, RDAMemoryResidentHelper mrm)
         {
-            MemoryStream memoryStream = new MemoryStream(buffer);
-            BinaryReader reader = new BinaryReader(memoryStream);
-
+            using MemoryStream memoryStream = new MemoryStream(buffer);
+            using BinaryReader reader = new BinaryReader(memoryStream);
             for (uint fileId = 0; fileId < block.fileCount; ++fileId)
             {
                 byte[] fileNameBytes = reader.ReadBytes((int)DirEntry.GetFilenameSize());

@@ -17,6 +17,8 @@ namespace RDAExplorer.ZLib
 -       private static extern int compress(byte[] des, ref int destLen, byte[] src, int srcLen);
         */
 
+        private const int COMPRESSION_LEVEL = 2;
+
         public static byte[] Uncompress(byte[] input, int uncompressedSize)
         {
             //byte[] des = new byte[uncompressedSize];
@@ -49,7 +51,7 @@ namespace RDAExplorer.ZLib
         {
             using var stream = new MemoryStream(input);
             using var memoryStream = new MemoryStream();
-            using var deflaterStream = new DeflaterOutputStream(memoryStream, new Deflater(0));
+            using var deflaterStream = new DeflaterOutputStream(memoryStream, new Deflater(COMPRESSION_LEVEL));
 
 
             stream.Position = 0;
